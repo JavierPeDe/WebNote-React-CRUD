@@ -1,11 +1,11 @@
 import React from 'react';
-import { LinkForm } from './components/LinkForm/index';
-import { Links } from './components/Links/index';
+import { NoteForm } from './components/NoteForm/index';
+import { Notes } from './components/Notes/index';
 const App = () => {
   return (
     <div className="container p-4">
-      <LinkForm />
-      <Links />
+      <NoteForm />
+      <Notes />
     </div>
   );
 };
