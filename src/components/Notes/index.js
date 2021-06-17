@@ -5,13 +5,13 @@ export const Notes = () => {
     const [notes, setNotes] = useState([])
     const [currentId, setCurrentId] = useState('')
     const addOrEdditNotes = async (newNote) => {
-        if(currentId ===""){
-        await db.collection('Notes').doc().set(newNote)}
-        else{
-           await db.collection('Notes').doc(currentId).update(newNote)
+        if (currentId === "") {
+            await db.collection('Notes').doc().set(newNote)
+        }
+        else {
+            await db.collection('Notes').doc(currentId).update(newNote)
         }
         setCurrentId('');
-
     }
 
 
@@ -37,11 +37,13 @@ export const Notes = () => {
         }
     }
 
-   
+    const resetEdit = () => {
+        setCurrentId('');
+    }
 
     return (
-        <>
-            <NoteForm addOrEdditNotes={addOrEdditNotes} currentId={currentId}  />
+        <div className='container '>
+            <NoteForm addOrEdditNotes={addOrEdditNotes} resetEdit={resetEdit} currentId={currentId} />
             {notes.map((note) => {
                 return (
                     <div key={note.id} className='card' >
@@ -59,6 +61,6 @@ export const Notes = () => {
                     </div>)
             })}
 
-        </>
+        </div>
     )
 }
