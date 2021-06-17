@@ -9,10 +9,11 @@ export const NoteForm = (props) => {
   };
 
   const [formValues, setFormValues] = useState(initialStateValues);
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    props.addOrEdditNotes(formValues)
-    setFormValues(initialStateValues)
+    props.addOrEdditNotes(formValues);
+    setFormValues(initialStateValues);
   };
 
   const handleInputChange = (evt) => {
@@ -20,20 +21,17 @@ export const NoteForm = (props) => {
     setFormValues({ ...formValues, [name]: value });
   };
 
-  // const getNotes= async (id)=>{
-  //   const doc= await (await db.collection('Notes').doc(id).get())
-  //   setFormValues({...doc.data()})
-  // }
+  const getNotes = async (id) => {
+    const doc = await await db.collection('Notes').doc(id).get();
+    setFormValues({ ...doc.data() });
+  };
 
-    useEffect(()=>{
-      console.log('id' + props.currentId)
-      if(props.currentId===''){
-        setFormValues(initialStateValues)
-      }
-      // else (
-      //   setFormValues( props.currentId)
-      // )
-    }, [props.currentId])
+  useEffect(() => {
+    console.log('id' + props.currentId);
+    if (props.currentId === '') {
+      setFormValues(initialStateValues);
+    } else getNotes(props.currentId);
+  }, [props.currentId]);
   return (
     <form onSubmit={handleSubmit} className="card-body card">
       <div className="form-group input-group">
@@ -74,7 +72,12 @@ export const NoteForm = (props) => {
           value={formValues.description}
         />
       </div>
-      <button className="btn btn-primary btn-block">save</button>
+      <button
+        className="btn  btn-block"
+        className={props.currentId === '' ? 'btn-primary' : 'btn-warning'}
+      >
+        {props.currentId === '' ? 'Save' : 'Edit'}
+      </button>
     </form>
   );
 };

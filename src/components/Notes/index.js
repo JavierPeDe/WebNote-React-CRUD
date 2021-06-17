@@ -5,9 +5,16 @@ export const Notes = () => {
     const [notes, setNotes] = useState([])
     const [currentId, setCurrentId] = useState('')
     const addOrEdditNotes = async (newNote) => {
-        await db.collection('Notes').doc().set(newNote)
-        console.log('new request')
+        if(currentId ===""){
+        await db.collection('Notes').doc().set(newNote)}
+        else{
+           await db.collection('Notes').doc(currentId).update(newNote)
+        }
+        setCurrentId('');
+
     }
+
+
     useEffect(() => {
         showNotes()
     }, [])
@@ -43,7 +50,7 @@ export const Notes = () => {
                                 <h3>{note.name}</h3>
                                 <div>
                                     <i role='button' className='material-icons text-danger ' onClick={() => deleteNotes(note.id)}>delete</i>
-                                    {/* <i role='button' className='material-icons text-danger ' onClick={() => setCurrentId(note.id)}>edit_note</i> */}
+                                    <i role='button' className='material-icons text-danger ' onClick={() => setCurrentId(note.id)}>edit_note</i>
                                 </div>
                             </div>
                             <p>{note.description}</p>
