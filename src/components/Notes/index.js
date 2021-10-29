@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { NoteForm } from './NoteForm/index';
 import { db } from '../../firebase';
 export const Notes = () => {
-<<<<<<< HEAD
   const [notes, setNotes] = useState([]);
   const [currentId, setCurrentId] = useState('');
   const addOrEdditNotes = async (newNote) => {
@@ -34,7 +33,6 @@ export const Notes = () => {
     }
   };
 
-<<<<<<< HEAD
   return (
     <>
       <NoteForm addOrEdditNotes={addOrEdditNotes} currentId={currentId} />
@@ -72,32 +70,3 @@ export const Notes = () => {
     </>
   );
 };
-=======
-    const resetEdit = () => {
-        setCurrentId('');
-    }
-
-    return (
-        <div className='container '>
-            <NoteForm addOrEdditNotes={addOrEdditNotes} resetEdit={resetEdit} currentId={currentId} />
-            {notes.map((note) => {
-                return (
-                    <div key={note.id} className='card' >
-                        <div className='card-body'>
-                            <div className='d-flex justify-content-between'>
-                                <h3>{note.name}</h3>
-                                <div>
-                                    <i role='button' className='material-icons text-danger ' onClick={() => deleteNotes(note.id)}>delete</i>
-                                    <i role='button' className='material-icons text-danger ' onClick={() => setCurrentId(note.id)}>edit_note</i>
-                                </div>
-                            </div>
-                            <p>{note.description}</p>
-                            <a href={note.url} rel="noreferrer" target='_blank'>Go to website</a>
-                        </div>
-                    </div>)
-            })}
-
-        </div>
-    )
-}
->>>>>>> 605942ec6ac155fcfbe2240e401e458cbfab85e2
