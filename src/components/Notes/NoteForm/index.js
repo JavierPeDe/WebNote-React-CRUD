@@ -31,9 +31,21 @@ export const NoteForm = (props) => {
       setFormValues(initialStateValues);
     } else getNotes(props.currentId);
   }, [props.currentId]); //eslint-disable-line
+
   return (
     <form onSubmit={handleSubmit} className="card-body card">
-      <div className="form-group input-group">
+      <i
+        role="button"
+        onClick={() => props.resetEdit()}
+        className={
+          props.currentId === ''
+            ? 'invisible'
+            : 'visible material-icons text-warning'
+        }
+      >
+        restore
+      </i>
+      <div className="form-group input-group m-1">
         <div className="input-group-text bg-light">
           <i className="material-icons">link</i>
         </div>
@@ -46,7 +58,7 @@ export const NoteForm = (props) => {
           value={formValues.url}
         />
       </div>
-      <div className="form-group input-group">
+      <div className="form-group input-group m-1">
         <div className="input-group-text bg-light">
           <i className="material-icons">create</i>
         </div>
@@ -59,7 +71,7 @@ export const NoteForm = (props) => {
           value={formValues.name}
         />
       </div>
-      <div className="form-group">
+      <div className="form-group m-1">
         <textarea
           className="description form-control"
           name="description"
