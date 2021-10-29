@@ -27,11 +27,10 @@ export const NoteForm = (props) => {
   };
 
   useEffect(() => {
-    console.log('id' + props.currentId);
     if (props.currentId === '') {
       setFormValues(initialStateValues);
     } else getNotes(props.currentId);
-  }, [props.currentId]);
+  }, [props.currentId]); //eslint-disable-line
   return (
     <form onSubmit={handleSubmit} className="card-body card">
       <div className="form-group input-group">
@@ -62,10 +61,9 @@ export const NoteForm = (props) => {
       </div>
       <div className="form-group">
         <textarea
-          className="description"
+          className="description form-control"
           name="description"
           id=""
-          className="form-control"
           placeholder="description"
           rows="3"
           onChange={handleInputChange}
@@ -73,8 +71,11 @@ export const NoteForm = (props) => {
         />
       </div>
       <button
-        className="btn  btn-block"
-        className={props.currentId === '' ? 'btn-primary' : 'btn-warning'}
+        className={
+          props.currentId === ''
+            ? 'btn  btn-block btn-primary'
+            : 'btn  btn-block btn-warning'
+        }
       >
         {props.currentId === '' ? 'Save' : 'Edit'}
       </button>
